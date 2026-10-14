@@ -1,0 +1,38 @@
+name: alignment-playground
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      # PyTorch CUDA 12.8 wheels (matches the training run: torch 2.11.0+cu128)
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.11.0
+
+      # Versions recorded in checkpoints/*/README.md from the real SFT + DPO runs
+      - transformers==5.15.1
+      - peft==0.20.0
+      - trl==1.12.0
+      - datasets==5.0.1
+      - tokenizers==0.22.2
+
+      # Not recorded in the checkpoints -> left as minimum versions.
+      # After a successful run, run `pip freeze | grep -i -E "bitsandbytes|accelerate"`
+      # and pin the exact versions here.
+      - bitsandbytes>=0.45
+      - accelerate>=1.0
+
+      # Supporting packages (all imported by the code or used by report_to: tensorboard)
+      - numpy
+      - pyyaml
+      - tqdm
+      - tensorboard
+
+# ---- setup ----
+# conda env create -f environment.yml
+# conda activate alignment-playground
+#
+# NOTE: the torch wheels above are built for CUDA 12.8. Check `nvidia-smi` first —
+# if your driver supports a different CUDA version, swap cu128 for the matching
+# tag (e.g. cu126, cu124) from https://pytorch.org/get-started/locally/

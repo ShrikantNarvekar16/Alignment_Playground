@@ -1,0 +1,14 @@
+
+import yaml
+
+
+def load_config(path: str) -> dict:
+
+    with open(path, "r", encoding="utf-8") as f:
+
+        return yaml.safe_load(f)
+
+
+def load_yaml_config(path: str) -> dict:
+
+    return load_config(path)

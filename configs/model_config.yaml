@@ -1,0 +1,18 @@
+# Base model shared by both SFT and DPO stages.
+# Change base_model here to scale up/down (e.g. Qwen/Qwen2.5-1.5B) without
+# touching any training code.
+
+base_model: "Qwen/Qwen2.5-3B"
+tokenizer: "Qwen/Qwen2.5-3B"
+
+# QLoRA settings — required at this model size on 8GB VRAM
+load_in_4bit: true
+bnb_4bit_quant_type: "nf4"
+bnb_4bit_compute_dtype: "bfloat16"
+bnb_4bit_use_double_quant: true
+
+# Keep this capped — the single biggest lever if you hit OOM.
+# Drop to 384 or 256 before dropping model size.
+max_seq_length: 512
+
+trust_remote_code: true
