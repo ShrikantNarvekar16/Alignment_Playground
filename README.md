@@ -1,6 +1,6 @@
 # Alignment Playground
 
-Pure-Python SFT -> DPO pipeline on a single RTX 4080 8GB. Trains a real
+Pure-Python SFT -> DPO pipeline on a single RTX 4060 8GB. Trains a real
 base model through two stages so you can compare "before" (SFT-only) vs
 "after" (SFT+DPO) behavior on the same prompts.
 
